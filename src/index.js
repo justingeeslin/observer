@@ -35,6 +35,11 @@ Observer = function() {
   var observer = new MutationObserver(function(mutations) {
   	mutations.forEach(function(mutation) {
 
+			// For the IEs of the world.
+			if (typeof NodeList.prototype.forEach !== 'function')  {
+			    NodeList.prototype.forEach = Array.prototype.forEach;
+			}
+
       // For each added node, new to the DOM
       mutation.addedNodes.forEach(function(node) {
 
