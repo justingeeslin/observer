@@ -19,7 +19,6 @@ module.exports = function(config) {
     // list of files / patterns to load in the browser
     files: [
 			'https://code.jquery.com/jquery-3.4.0.js',
-      'dist/style.css',
 			'tests/*.js',
     ],
 
