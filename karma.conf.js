@@ -98,23 +98,27 @@ module.exports = function(config) {
       edge: {
         base: 'BrowserStack',
         browser: 'Edge',
-        // browser_version: '18',
         os: 'WINDOWS',
         os_version: '10'
       },
       IE11: {
         base: 'BrowserStack',
         browser: 'IE',
-        // browser_version: '11',
+        browser_version: '11',
         os: 'WINDOWS',
         os_version: '10'
       },
       firefox_win: {
         base: 'BrowserStack',
         browser: 'firefox',
-        browser_version: '66',
         os: 'WINDOWS',
         os_version: '10'
+      },
+      safari_browserstack: {
+        base: 'BrowserStack',
+        browser: 'safari',
+        os: 'OS X',
+        os_version: 'Mojave'
       },
 
     },
@@ -122,7 +126,7 @@ module.exports = function(config) {
     browsers: [
       'edge',
       'IE11',
-      'Safari',
+      'safari_browserstack',
       'Chrome',
       'firefox_win'
     ],
