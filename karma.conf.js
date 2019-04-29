@@ -94,53 +94,39 @@ module.exports = function(config) {
     autoWatch: true,
 
 
-    // start these browsers
-    // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: [
-      // 'chrome_perf',
-      // 'IE10',
-      // 'IE11',
-      'Safari',
-      // 'Firefox',
-      // 'IE11'
-    ],
+    // define browsers
+    customLaunchers: {
+      edge: {
+        base: 'BrowserStack',
+        browser: 'Edge',
+        // browser_version: '18',
+        os: 'WINDOWS',
+        os_version: '10'
+      },
+      IE11: {
+        base: 'BrowserStack',
+        browser: 'IE',
+        // browser_version: '11',
+        os: 'WINDOWS',
+        os_version: '10'
+      },
+      firefox_win: {
+        base: 'BrowserStack',
+        browser: 'firefox',
+        browser_version: '66',
+        os: 'WINDOWS',
+        os_version: '10'
+      },
 
-		customLaunchers: {
-				Chrome_travis_ci: {
-						base: 'Chrome',
-						flags: ['--no-sandbox']
-				},
-        chrome_perf: {
-            base: 'Chrome',
-            flags: ['--disable-popup-blocking', '--enable-gpu-benchmarking', '--enable-threaded-compositing']
-        },
-        'IE10': {
-          base: 'WebDriver',
-          config: {
-            hostname: '192.168.2.25',
-            port: 4444
-          },
-          browserName: 'internet explorer',
-          platform: 'Windows 8',
-          version: '10',
-          'x-ua-compatible': 'IE=EmulateIE10',
-          name: 'Karma',
-          pseudoActivityInterval: 30000
-        },
-        'IE11': {
-          base: 'WebDriver',
-          config: {
-            hostname: '192.168.2.25',
-            port: 4444
-          },
-          browserName: 'internet explorer',
-          platform: 'Windows 8',
-          version: '10',
-          // 'x-ua-compatible': 'IE=EmulateIE10',
-          name: 'Karma',
-          pseudoActivityInterval: 30000
-        },
-		},
+    },
+
+    browsers: [
+      'edge',
+      'IE11',
+      'Safari',
+      'Chrome',
+      'firefox_win'
+    ],
 
     // Continuous Integration mode
     // if true, Karma captures browsers, runs the tests and exits
@@ -151,7 +137,4 @@ module.exports = function(config) {
     concurrency: Infinity
   })
 
-  if (process.env.TRAVIS || process.env.CIRCLECI) {
-		config.browsers = ['Chrome_travis_ci'];
-	}
 }
