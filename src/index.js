@@ -56,6 +56,13 @@ Observer = function() {
 
         for(var j in selectorClassMap) {
           var item = selectorClassMap[j];
+
+					// If you don't have `matches` but you do have `matchesSelector`...
+					if (typeof node.matches !== "function" && typeof node.msMatchesSelector === "function") {
+						// Let's all agree to call it matches.
+						node.matches = node.msMatchesSelector;
+					}
+
 					// TODO consider changing the attribute to data on the node.
           if (node.matches(item.sel) && !node.hasAttribute('constructed')) {
             console.log('About to construct upon ', node);
