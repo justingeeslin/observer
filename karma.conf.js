@@ -67,7 +67,7 @@ module.exports = function(config) {
       outputFile: 'tests/index.html',
 
       // Optional
-      pageTitle: 'Sensible Unit Tests',
+      // pageTitle: 'Unit Tests',
       // subPageTitle: '',
       groupSuites: true,
       useCompactStyle: true
