@@ -1,6 +1,10 @@
 Observer = function() {
   var self = this;
 
+  var defaults = {
+    debug: false
+  };
+
   // A mapping from selector to class.
   var selectorClassMap = [
     // {
@@ -50,9 +54,11 @@ Observer = function() {
         }
 
         // Try to match the newly added node to a selector
-        console.log('Trying to match node:', node)
+        if (self.debug) {
+          console.log('Trying to match node:', node);
 
-				console.log('Searching for match among ' + selectorClassMap.length + ' selectors');
+  				console.log('Searching for match among ' + selectorClassMap.length + ' selectors');
+        }
 
         for(var j in selectorClassMap) {
           var item = selectorClassMap[j];
@@ -65,7 +71,10 @@ Observer = function() {
 
 					// TODO consider changing the attribute to data on the node.
           if (node.matches(item.sel) && !node.hasAttribute('constructed')) {
-            console.log('About to construct upon ', node);
+            if (self.debug) {
+              console.log('About to construct upon ', node);
+            }
+
             var options = {
               el: $(node)
             };
@@ -76,7 +85,9 @@ Observer = function() {
 
           }
           else {
-            console.log('Mismatch ', node, item.sel);
+            if (self.debug) {
+              console.log('Mismatch ', node, item.sel);
+            }
           }
 
         }
