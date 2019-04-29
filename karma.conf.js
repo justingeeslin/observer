@@ -116,13 +116,19 @@ module.exports = function(config) {
         os: 'WINDOWS',
         os_version: '10'
       },
+      safari_browserstack: {
+        base: 'BrowserStack',
+        browser: 'safari',
+        os: 'OS X',
+        os_version: 'Mojave'
+      },
 
     },
 
     browsers: [
       'edge',
       'IE11',
-      'Safari',
+      'safari_browserstack',
       'Chrome',
       'firefox_win'
     ],
