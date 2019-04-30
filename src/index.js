@@ -105,22 +105,26 @@ Observer = function(options) {
           if (self.debug) {
             console.log('Attempting to select children', node, item.sel);
           }
-          var addedDescendantsMatches = node.querySelectorAll(item.sel);
-          if (addedDescendantsMatches.length > 0) {
-            if (self.debug) {
-              console.log(addedDescendantsMatches.length + ' children found', node, item.sel);
-            }
-            // Convert NodeList to array for concatenation
-            addedDescendantsMatches = Array.prototype.slice.call(addedDescendantsMatches);
-            //Treat is as an added node
-            prospectiveMatches = prospectiveMatches.concat(addedDescendantsMatches);
-          }
-          else {
-            if (self.debug) {
-              console.log('None found', node, item.sel);
-            }
-          }
 
+          // If node has children...
+          if (node.hasChildNodes()) {
+            // .. find matches among the children.
+            var addedDescendantsMatches = node.querySelectorAll(item.sel);
+            if (addedDescendantsMatches.length > 0) {
+              if (self.debug) {
+                console.log(addedDescendantsMatches.length + ' children found', node, item.sel);
+              }
+              // Convert NodeList to array for concatenation
+              addedDescendantsMatches = Array.prototype.slice.call(addedDescendantsMatches);
+              //Treat is as an added node
+              prospectiveMatches = prospectiveMatches.concat(addedDescendantsMatches);
+            }
+            else {
+              if (self.debug) {
+                console.log('None found', node, item.sel);
+              }
+            }
+          }
         }
 
 
