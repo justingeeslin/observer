@@ -128,7 +128,8 @@ module.exports = function(config) {
       'IE11',
       'safari_browserstack',
       'Chrome',
-      'firefox_win'
+      'firefox_win',
+      // 'Safari'
     ],
 
     // Continuous Integration mode
