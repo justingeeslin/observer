@@ -30,7 +30,18 @@ describe('Observer', function() {
       done();
     });
 
-    $(document.body).append('<div super="true"></div>');
+    $(document.body).append('<div super="true">Child</div>');
+  });
+
+  it('should construct the component upon insertion to the document, subtree test', function(done) {
+    // On complete, as it bubbles up from the component
+    $(document.body).on('complete', function() {
+      console.log('Complete event on body..')
+      expect($('div[super]')[0].hasAttribute('constructed')).toBe(true);
+      done();
+    });
+
+    $(document.body).append('<div><div super="true">Descendant</div></div>');
   });
 
 });

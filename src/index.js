@@ -44,8 +44,17 @@ Observer = function() {
 			    NodeList.prototype.forEach = Array.prototype.forEach;
 			}
 
+      if (self.debug) {
+        console.log('Mutation! - Waterworld (1995)', mutation);
+      }
+
+      // These are the added nodes, but only the children to the target
+      var addedChildren = mutation.addedNodes;
+      // The added children are our first prospective matches. As an array.
+      var prospectiveMatches = Array.prototype.slice.call(addedChildren);
       // For each added node, new to the DOM
-      mutation.addedNodes.forEach(function(node) {
+      for( var i = 0; i < prospectiveMatches.length; i++) {
+        var node = prospectiveMatches[i];
 
         // If this node is not an element..
         if (node.nodeType != 1) {
@@ -90,8 +99,30 @@ Observer = function() {
             }
           }
 
+          // Consider also prospetive matches among the descendants of the target
+          if (self.debug) {
+            console.log('Attempting to select children', node, item.sel);
+          }
+          var addedDescendantsMatches = node.querySelectorAll(item.sel);
+          if (addedDescendantsMatches.length > 0) {
+            if (self.debug) {
+              console.log(addedDescendantsMatches.length + ' children found', node, item.sel);
+            }
+            // Convert NodeList to array for concatenation
+            addedDescendantsMatches = Array.prototype.slice.call(addedDescendantsMatches);
+            //Treat is as an added node
+            prospectiveMatches = prospectiveMatches.concat(addedDescendantsMatches);
+          }
+          else {
+            if (self.debug) {
+              console.log('None found', node, item.sel);
+            }
+          }
+
         }
-      })
+
+
+      }
 
   	});
   });
@@ -99,7 +130,7 @@ Observer = function() {
   var observerConfig = {
   	attributes: true,
   	childList: true,
-    // subtree: true,
+    subtree: true,
   	characterData: true
   };
 
