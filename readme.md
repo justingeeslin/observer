@@ -1,5 +1,7 @@
 # Observer
 
+[![CircleCI](https://circleci.com/gh/justingeeslin/observer.svg?style=svg)](https://circleci.com/gh/justingeeslin/observer)
+
 * Enables declarative Web Components.
 * Similar to Custom Elements, but without the need of new HTML tags.
 
