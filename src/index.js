@@ -1,9 +1,11 @@
-Observer = function() {
+Observer = function(options) {
   var self = this;
 
   var defaults = {
     debug: false
   };
+
+  $.extend(self, defaults, options);
 
   // A mapping from selector to class.
   var selectorClassMap = [

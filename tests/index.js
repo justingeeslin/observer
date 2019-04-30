@@ -3,7 +3,9 @@ const Observer = require('../src/index.js');
 describe('Observer', function() {
 
   beforeAll(function() {
-    theObserver = new Observer();
+    theObserver = new Observer({
+      debug: true
+    });
     // Define a component
     SuperComponent = function(options) {
       var self = this;
