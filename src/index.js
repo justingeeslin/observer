@@ -72,7 +72,7 @@ Observer = function(options) {
         // If this node is not an element..
         if (node.nodeType != 1) {
           // continue trying to find a match
-          return true;
+          continue;
         }
 
         // Try to match the newly added node to a selector
