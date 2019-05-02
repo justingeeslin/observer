@@ -47,7 +47,18 @@ Observer = function(options) {
 			}
 
       if (self.debug) {
-        console.log('Mutation! - Waterworld (1995)', mutation);
+        var msg = '';
+        if (mutation.removedNodes > 0) {
+          msg = 'Deletions';
+        }
+        else if (mutation.addedNodes > 0) {
+          msg = 'Additions';
+        }
+        else {
+          msg = 'Mutation! - Waterworld (1995)';
+        }
+
+        console.log(msg, mutation);
       }
 
       // These are the added nodes, but only the children to the target
@@ -68,7 +79,7 @@ Observer = function(options) {
         if (self.debug) {
           console.log('Trying to match node:', node);
 
-  				console.log('Searching for match among ' + selectorClassMap.length + ' selectors');
+  				console.log('Searching for match among ' + selectorClassMap.length + ' selectors', selectorClassMap);
         }
 
         for(var j in selectorClassMap) {
