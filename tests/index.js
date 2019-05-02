@@ -46,4 +46,16 @@ describe('Observer', function() {
     $(document.body).append('<div><div super="true">Descendant</div></div>');
   });
 
+  it('should construct the component upon insertion to the document, nested components', function(done) {
+    // On complete, as it bubbles up from the component
+    var nestedComponentSel = 'div.nested[super]';
+    $(document.body).on('complete', nestedComponentSel, function() {
+      console.log('Complete event on body..')
+      expect($(nestedComponentSel)[0].hasAttribute('constructed')).toBe(true);
+      done();
+    });
+
+    $(document.body).append('<div><div><!-- Test loops by not having the element to be constructed be the first element --></div><div super="true">Component<div super="true" class="nested">Nested Descendant</div></div></div>');
+  });
+
 });
