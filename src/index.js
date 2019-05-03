@@ -100,10 +100,20 @@ Observer = function(options) {
             var options = {
               el: $(node)
             };
+
+            // Get attributes of the element, they will be the options of the constructor.
+            Array.prototype.slice.call(node.attributes).forEach(function(item) {
+              if (self.debug) {
+                console.log(item.name + ': '+ item.value);
+              }
+
+              options[item.name] = item.value;
+            });
+
             var aComponent = new item.class(options);
 						// Set a flag so that construction doesn't happen repeatedly.
 						aComponent.el.attr('constructed', 'true');
-            aComponent.el.trigger('complete');
+            aComponent.el.trigger('complete', aComponent);
 
           }
           else {
