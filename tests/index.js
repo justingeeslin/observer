@@ -35,6 +35,18 @@ describe('Observer', function() {
     $(document.body).append('<div super="true">Child</div>');
   });
 
+  it('should construct the component upon insertion to the document with attributes as data members', function(done) {
+    superMarkup = $('<div super="true" custom="tree">Child</div>');
+
+    superMarkup.on('complete', function(event, componentObj) {
+      console.log('Complete event on body..', event)
+      expect(componentObj.super).toBe("true");
+      done();
+    });
+
+    $(document.body).append(superMarkup);
+  });
+
   it('should construct the component upon insertion to the document, subtree test', function(done) {
     // On complete, as it bubbles up from the component
     $(document.body).on('complete', function() {
